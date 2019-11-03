@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <%- include head.ejs %>
+
+  <body>
+    <%- include nav.ejs %>
+
+    <div class="container">
+	  <h1 class="my-4">Szukaj artykułu - <%- meta.query %></h1>
+	  <small>Znaleziono <%- meta.results %> artykuł<%- meta.results > 1 ? (meta.results > 4 ? "ów":"y"):""%> w <%- meta.time %> s</small>
+      <div class="table-responsive table-sm">
+        <table class="table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Tytuł</th>
+                <th scope="col">Data</th>
+                <th scope="col">Autor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(article of articles) { %>
+                <tr>
+                  <td><a href="/article/<%- article.src %>"><%- article.title %></a></td>
+                  <td><time data-update datetime="<%- article.date %>"><%- dateFormat(article.date) %></time></td>
+                  <td><%- article.author %></td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </table>
+      </div>
+      <%- include footer.ejs %>
+    </div>
+
+    <%- include scripts.ejs %>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <%- include head.ejs %>
+
+  <body>
+    <%- include nav.ejs %>
+
+    <div class="container">
+
+
+      <div class="row">
+        <div class="col-md-12 mt-3" id="posts">
+			<form action="/dashboard/articles/upload" method="POST" enctype="multipart/form-data">
+
+				<label for="usr">Title:</label>
+				<input type="text" class="form-control" name="title">
+
+				<label for="comment">Content:</label>
+				<textarea class="form-control" rows="5" name="content"></textarea>
+
+				<input type="text" name="tags" hidden>
+
+				<label for="author">Author:</label>
+				<input list="author" class="form-control" name="author">
+				<datalist id="author">
+					<option value="Pstrucha Mateusz">
+				</datalist>
+
+				<div class="custom-file my-3">
+					<input type="file" class="custom-file-input" name="files">
+					<label class="custom-file-label b" for="customFile">Choose file</label>
+				</div>
+
+				<button type="submit">upload</button>
+
+			</form>
+		</div>
+      </div>
+
+      
+    </div>
+
+	<%- include footer.ejs %>
+	<%- include scripts.ejs %>
+  </body>
+</html>

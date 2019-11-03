@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <%- include head.ejs %>
+
+  <body>
+    <%- include nav.ejs %>
+
+    <div class="container">
+      <h1 class="my-4">Artykuły według tagów</h1>
+      <hr>
+      <div class="tagsList">
+        <% for(tag of tags) {%>
+          <a class="tagBox" href="/tag/<%- tag %>"><%- tag %></a>
+        <% } %>
+        <!-- <div class="tagBox">
+          <input type="text" style="border: 0;background: transparent;"/>
+          <a style="cursor:pointer" onclick="location.href+=','+this.parentElement.querySelector('input').value">+</a>
+        </div> -->
+
+        <div class="tagBox">
+          <script>
+            function addTag(e){
+              var newtag = document.querySelector("#newTag").value.split(','),
+                oldtags = location.pathname.slice(5).split(',').filter(Boolean)
+                location.href = "/tag/"+[...newtag, ...oldtags]
+              return false
+            }
+          </script>
+          <form onsubmit="return addTag()" style="display: inline;">
+            <input id="newTag" placeholder="dodaj tag" type="text" style="border: 0;background: transparent;display: inline;"/>
+          </form>
+        </div>
+      </div>
+      <div class="table-responsive table-sm">
+        <table class="table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Tytuł</th>
+                <th scope="col">Data</th>
+                <th scope="col">Autor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(article of articles) { %>
+                <tr>
+                  <td><a href="/article/<%- article.src %>"><%- article.title %></a></td>
+                  <td><time data-update datetime="<%- article.date %>"><%- dateFormat(article.date) %></time></td>
+                  <td><%- article.author %></td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </table>
+      </div>
+      <%- include footer.ejs %>
+    </div>
+
+    <%- include scripts.ejs %>
+  </body>
+</html>
